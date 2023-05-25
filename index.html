@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <svg 
+            viewBox="2.3021333800146246 34.336848502698366 284.6311095728609 121.604815968998" fill="black">
+            <path id="test"
+                d="M2.31 101.53L2.28 120.02L25.87 120.03L49.45 120.02L49.45 101.55L41.28 101.55L41.31 86.66L43.95 86.64L56.31 99.12L56.29 120.00L74.53 120.02L92.76 120.03L92.79 101.54L87.61 101.53L87.63 97.95L86.19 85.93L71.67 77.55L71.66 77.28L79.23 74.31L87.38 57.87L78.61 39.85L63.03 35.89L42.77 35.89L22.52 35.91L2.28 35.89L2.31 54.37L10.23 54.39L10.21 77.95L10.23 101.55ZM45.49 73.83L41.29 73.82L41.30 54.36L45.36 54.38L55.58 63.98L45.49 73.83ZM164.41 120.02L192.01 120.03L192.01 101.53L183.50 101.55L174.51 93.38L186.36 74.65L192.03 74.65L192.00 61.21L166.44 61.23L166.44 74.65L171.27 74.66L164.78 84.61L149.64 70.95L160.33 53.17L152.36 38.78L136.10 34.32L117.45 39.83L108.63 56.65L116.55 72.48L116.78 72.75L102.33 82.22L96.14 97.93L104.96 116.14L125.07 121.57L141.38 119.12L156.13 111.73ZM139.83 62.07L133.57 52.82L140.30 46.23L147.61 53.90L140.90 63.03ZM121.45 93.27L127.70 83.52L144.86 100.57L133.81 103.46L121.45 93.25ZM196.45 101.53L196.47 120.00L219.61 120.03L242.77 120.02L249.50 119.54L268.85 113.42L282.42 98.45L286.82 78.60L284.17 62.28L275.46 48.26L261.62 39.27L241.83 35.88L219.12 35.89L196.47 35.91L196.47 54.37L204.48 54.37L204.48 77.94L204.51 101.54ZM235.57 101.53L235.59 77.96L235.58 54.38L248.54 58.11L255.00 77.67L248.54 97.70L235.57 101.53Zi">
+            </path>
+        </svg>
+    </div>
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                var d = document.getElementById("test").getAttribute("d");
+                const arr = d.split(' ');
+                let newValue = '';
+
+                for(let i = 0; i < arr.length; i++){
+                    if (/\.(.*?)L/.test(arr[i])){
+                        // Extract the number between the decimal point and 'L' character
+                        let match = arr[i].match(/\.(.*?)L/);
+                        let extractedNumber = parseFloat(match[1]);
+
+                        // Generate a random number between 50 and 100
+                        let randomNumber = Math.floor(Math.random() * 1000) + 1;
+
+                        // Create the updated string with the new number
+                        arr[i] = arr[i].replace(/\.(.*?)L/, '.' + randomNumber + 'L');
+                    } 
+                    
+                    // Check if the element is the last element in the array
+                    if (arr.indexOf(i) === arr.length - 1) {
+                        newValue += arr[i];
+                    } else {
+                        newValue += arr[i] + ' ';
+                    }
+                }
+
+                document.getElementById("test").setAttribute("d", newValue);
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>
