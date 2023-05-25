@@ -27,11 +27,19 @@
                         let match = arr[i].match(/\.(.*?)L/);
                         let extractedNumber = parseFloat(match[1]);
 
-                        // Generate a random number between 50 and 100
-                        let randomNumber = Math.floor(Math.random() * 1000) + 1;
+                        // Generate a random number between 
+                        let randomNumber = Math.floor(Math.random() * 100) + 1;
 
                         // Create the updated string with the new number
                         arr[i] = arr[i].replace(/\.(.*?)L/, '.' + randomNumber + 'L');
+
+                        // Extract the last number after the last dot
+                        let dotIndex = arr[i].lastIndexOf('.');
+                        let extractedLastNumber = parseFloat(arr[i].substring(dotIndex + 1));
+
+                        // Generate a random number between 
+                        let randomLastNumber = Math.floor(Math.random() * 100) + 1;
+                        arr[i] = arr[i].substring(0, dotIndex + 1) + randomLastNumber;
                     } 
                     
                     // Check if the element is the last element in the array
